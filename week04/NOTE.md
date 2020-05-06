@@ -12,31 +12,24 @@
 * Promise的then方法以及async函数里的await会将一个微任务入队，微任务列表里的微任务按入队顺序执行
 
 ```javascript
-    async function afoo() {
-    console.log("-2")
-
-
+   async function afoo(){
+    console.log("1");
     await new Promise(resolve => resolve());
-    console.log("-1")
+    console.log("2");
 }
 
-
-new Promise(resolve => (console.log("0"), resolve()))
-    .then(() => (
-        console.log("1"),
+new Promise(resolve => (console.log("3"), resolve()))
+    .then(()=>(
+        console.log("4"), 
         new Promise(resolve => resolve())
-            .then(() => console.log("1.5"))));
+            .then(() => console.log("5")) ));
 
-
-setTimeout(function () {
-    console.log("2");
-
-    new Promise(resolve => resolve()).then(console.log("3"))
-
-
-}, 0)
-console.log("4");
-console.log("5");
+setTimeout(function(){
+    console.log("6");
+    new Promise(resolve => resolve()) .then(console.log("7"));
+}, 0);
+console.log("8");
+console.log("9");
 afoo();
 // 3
 // 8

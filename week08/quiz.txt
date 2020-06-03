@@ -1,0 +1,19 @@
+写出下列选择器的优先级
+
+div#a.b .c[id=x] [0, 1, 3, 1];
+
+#a:not(#b) [0, 2, 0, 0];
+
+*.a [0, 0, 1, 0];
+
+div.a [0, 0, 1, 1];
+
+思考题
+
+Q:为什么first-letter可以设置float之类的，而first-line不行?
+
+A:float脱离文档流出去，和first-line矛盾了
+
+Q:first-line为什么可以改字体?
+
+A:first是逐个作用于文字，没有作用于盒

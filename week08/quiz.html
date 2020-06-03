@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		div#a.b .c[id=x] {
+			color: red;
+		}
+
+		div#a.b .c.d {
+			color: blue;
+		}
+
+		#e:not(#f) {
+			color: purple;
+		}
+
+		#y #e {
+			color: pink;
+		}
+
+		div.g {
+			color: green;
+		}
+
+		*.g {
+			color: brown;
+		}
+	</style>
+</head>
+<body>
+	<div id="a" class="b">
+		<div class="c d" id="x">red</div>
+	</div>
+
+	<div id="y">
+		<div id="e">text</div>
+	</div>
+
+	<div class="g">text</div>
+</body>
+</html>

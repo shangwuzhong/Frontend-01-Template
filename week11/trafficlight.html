@@ -1,0 +1,79 @@
+<style>
+	div {
+		background-color: grey;
+		display: inline-block;
+		margin: 30px;
+		width: 100px;
+		height: 100px;
+		border-radius: 50px;
+	}
+
+	.green.light {
+		background-color: green;
+	}
+
+	.yellow.light {
+		background-color: yellow;
+	}
+
+	.red.light {
+		background-color: red;
+	}
+</style>
+
+<div class='green'></div>
+<div class='yellow'></div>
+<div class='red'></div>
+
+<script>
+	function green() {
+		// 返回带有指定标签名对象的集合
+		var lights = document.getElementsByTagName('div');
+		for (let i = 0; i < 3; i++) {
+			// 返回一个元素的类属性的实时 DOMTokenList 集合
+			lights[i].classList.remove('light');
+			// 调用 class 为 green 的元素中，
+			document.getElementsByClassName('green')[0].classList.add('light');
+		}
+	}
+
+	function yellow() {
+		// 返回带有指定标签名对象的集合
+		var lights = document.getElementsByTagName('div');
+		for (let i = 0; i < 3; i++) {
+			// 返回一个元素的类属性的实时 DOMTokenList 集合
+			lights[i].classList.remove('light');
+			// 调用 class 为 yellow 的元素中，
+			document.getElementsByClassName('yellow')[0].classList.add('light');
+		}
+	}
+
+	function red() {
+		// 返回带有指定标签名对象的集合
+		var lights = document.getElementsByTagName('div');
+		for (let i = 0; i < 3; i++) {
+			// 返回一个元素的类属性的实时 DOMTokenList 集合
+			lights[i].classList.remove('light');
+			// 调用 class 为 red 的元素中，
+			document.getElementsByClassName('red')[0].classList.add('light');
+		}
+	}
+
+	function go() {
+		green();
+		// setTimeout(yellow, 1000);
+		// setTimeout(red, 1200);
+		// setTimeout(go, 1700);
+
+		// 嵌套版
+		setTimeout(function() {
+			yellow();
+			setTimeout(function() {
+				red();
+				setTimeout(function() {
+					go();
+				}, 5000);
+			}, 2000)
+		}, 10000)
+	}
+</script>

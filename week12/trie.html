@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		class Trie {
+			constructor(){
+				this.root = Object.create(null);
+			}
+
+			insert(word){
+				let node = this.root;
+				for(let c of word){
+					if(!node[c])
+						node[c] = Object.create(null);
+					node = node[c];
+				}
+
+				if(!('$' in node)){
+					node['$'] = 0;
+				}
+				node['$']++;
+			}
+			max(){
+				let maxWord = null;
+				let root = this.root;
+				let maxV = 0;
+				const getDeep=(obj,word)=>{
+					if(obj.$ && obj.$ > maxV){
+						maxV = obj.$;
+						maxWord = word;
+					}
+					for(let key in obj){
+						getDeep(obj[key],word+key);
+					}
+				}
+				getDeep(root,'');
+			}
+		}
+
+		let Trie = new Tree();
+
+		function rnd(n){
+			let str = '';
+			for(let i=0; i<n;i++){
+				str +=String.fromCharCode('a'.charCodeAt() + Math.floor(Math.random()*26));
+			}
+			return str;
+		}
+		for(let i=0; i<1000000;i++){
+			tree.insert(rnd(3))
+		}
+		// alert(11)
+	</script>
+</body>
+</html>

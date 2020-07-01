@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// alert(11)
+		//判断 字符串中是否包含某个字符串
+		//传统做法--暴力循环
+		function computeString(str,pattern){
+			let isRe = false;
+			for(let i=0;i< str.length;i++){
+				if(isRe) break;
+				for(let j=0;j<pattern.length;j++){
+					if(str[i]==pattern[j]){
+						j++;
+						if(j==pattern.length) isRe = true;
+						break;
+					}
+				}
+			}
+		}
+
+
+		//kmp
+		function computeStringKmp(str,mat){	
+			let commonMaxLen = 0;       
+			   let next = [0, 0];         
+			   let matLen = mat.length;    
+			   let strIndex = 0;         
+			   let matIndex = 0;          
+
+			   // 该循环求出 next 数组
+			   for (let i = 2; i <= matLen - 1; i++) {
+			       let temp = mat.slice(0, i)    
+			       for (let j = 1; j < temp.length - 1; j++) {
+			           let tempSub1 = temp.slice(0, j)
+			           let tempSub2 = temp.slice(temp.length - j, temp.length);
+			           if (tempSub1 == tempSub2) {
+			               commonMaxLen = tempSub1.length;
+			           }
+			       }
+			       next[i] = commonMaxLen;
+			   }
+
+			   while (matIndex < matLen && strIndex < str.length) {
+			       if (str[strIndex] == mat[matIndex]) { 
+			           strIndex++;
+			           matIndex++;
+			       } else {
+			           if(matIndex==0){ 
+			               strIndex+=1;
+			           }else {
+			               matIndex = next[matIndex]; 
+			           }
+			       }
+			   }
+			   if(matIndex==matLen){ 
+			       return true;
+			   }
+
+			   return false;
+
+		}
+
+
+		let result = computeStringKmp('hellow world!helhe is transform!','helhe');
+
+	</script>
+</body>
+</html>
